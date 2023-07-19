@@ -1,6 +1,7 @@
-#include "main.h"
+#include <stdio.h>
+
 /**
- * main - check the code for Holberton School students.
+ * main - natural.c.
  *
  * Return: Always 0.
  */
