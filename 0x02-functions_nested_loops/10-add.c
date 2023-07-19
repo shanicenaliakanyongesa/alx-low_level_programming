@@ -1,14 +1,13 @@
 #include "main.h"
 
 /**
- * add - Check Description
- * @x: integer
- * @y: integer
- * Description: function adds two integers together and goves result
- * Return: Result after adding x and y
+ * add - Check Holberton
+ * @a: An integer a
+ * @b: An integer b
+ * Description: Function that adds two integers and returns the result
+ * Return: Result to add a and b
  */
-
-int add(int x, int y)
+int add(int a, int b)
 {
-	return (x + y);
+	return (a + b);
 }
