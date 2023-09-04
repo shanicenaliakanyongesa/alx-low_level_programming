@@ -1,50 +1,44 @@
 #include "main.h"
 
 /**
- * read_textfile - reads a text file and prints it to the POSIX standard output
- * @filename: the name of the file to read
- * @letters: the number of letters it should read and print
- *
- * Return: the actual number of letters it could read and print
- */
+* read_textfile - check the code for Holberton School students.
+* @filename: file to read and write
+* @letters: number of letters to read and write.
+* Return: letters printed
+*/
+
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd;
-	ssize_t len_read, len_written;
-	char *buf;
+	ssize_t nletters;
+	int file;
+	char *text;
 
-	if (filename == NULL)
+	if (!filename)
 		return (0);
-
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
+	text = malloc(sizeof(char) * letters + 1);
+	if (text == NULL)
 		return (0);
-
-	buf = malloc(sizeof(char) * letters);
-	if (buf == NULL)
+	file = open(filename, O_RDONLY);
+	if (file == -1)
 	{
-		close(fd);
+		free(text);
 		return (0);
 	}
-
-	len_read = read(fd, buf, letters);
-	if (len_read == -1)
+	nletters = read(file, text, sizeof(char) * letters);
+	if (nletters == -1)
 	{
-		close(fd);
-		free(buf);
+		free(text);
+		close(file);
 		return (0);
 	}
-
-	len_written = write(STDOUT_FILENO, buf, len_read);
-	if (len_written == -1 || len_written != len_read)
+	nletters = write(STDOUT_FILENO, text, nletters);
+	if (nletters == -1)
 	{
-		close(fd);
-		free(buf);
+		free(text);
+		close(file);
 		return (0);
 	}
-
-	close(fd);
-	free(buf);
-
-	return (len_written);
+	free(text);
+	close(file);
+	return (nletters);
 }
